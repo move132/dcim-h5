@@ -1,0 +1,44 @@
+{
+  "name": "DCIM-H5",
+  "version": "1.0.0",
+  "description": "```\r DCIM-H5\r ```",
+  "main": "mian.js",
+  "scripts": {
+    "dev": "vue-cli-service serve",
+    "build": "vue-cli-service build && node zip.js && http-server ./dist -p 9999 ",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "core-js": "^2.6.5",
+    "fastclick": "^1.0.6",
+    "normalize.css": "^8.0.1",
+    "vant": "^2.0.9",
+    "vue": "^2.6.6",
+    "vue-cookie": "^1.1.4",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.0.5",
+    "@vue/cli-plugin-eslint": "^3.0.5",
+    "@vue/cli-service": "^3.0.5",
+    "@vue/eslint-config-standard": "^4.0.0",
+    "babel-eslint": "^10.0.1",
+    "babel-plugin-import": "^1.12.0",
+    "compressing": "^1.4.0",
+    "compression-webpack-plugin": "^2.0.0",
+    "eslint": "^5.8.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "node-sass": "^4.9.0",
+    "postcss-px2rem": "^0.3.0",
+    "qs": "^6.7.0",
+    "http-server": "^0.11.1",
+    "sass-loader": "^7.1.0",
+    "uglifyjs-webpack-plugin": "^2.1.2",
+    "vue-template-compiler": "^2.5.21",
+    "webpack-bundle-analyzer": "^3.3.0"
+  },
+  "author": "",
+  "license": "ISC"
+}
