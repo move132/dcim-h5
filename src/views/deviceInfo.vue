@@ -50,9 +50,10 @@
 
             <illumine v-else-if="queryParam.detyName === '照明'" ref="zm"></illumine>
             <battery v-else-if="queryParam.detyName === '电池'" ref="dc"></battery>
-
+            <accesscontrol v-else-if="queryParam.detyName === '门禁'"  ref="mj"></accesscontrol>
+            <newsletter-status v-else-if="queryParam.detyName === '通讯设备状态'"  ref="txzt" ></newsletter-status>
            <!--  <battery ref="battery"></battery> -->
-            <accesscontrol ref="accesscontrol"  data-type="门禁"></accesscontrol>
+            <!-- <accesscontrol ref="accesscontrol"  data-type="门禁"></accesscontrol> -->
             <!-- <correctcond ref="correctcond"></correctcond> -->
             <!-- <powercabinet ref="powercabinet"></powercabinet> -->
             <!-- <newsletter-status ref="newsletterstatus" data-type="通讯设备状态"></newsletter-status> -->
