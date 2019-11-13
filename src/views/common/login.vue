@@ -84,6 +84,7 @@ export default {
                     password: this.password
                 }).then(({data}) => {
                     data["token"] = getUUID();
+                    data["userId"] = data.userId;
                     this.$store.commit("login/LOGIN", data);
                     const redirect = this.$route.query.redirect || "/home";
                     this.router.replace({ path: redirect });

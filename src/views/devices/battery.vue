@@ -38,19 +38,19 @@
                             <template>
                                 <template v-for="(subitem, num) in item.multiData">
                                     <div class="item" :key="num+'dy'" >
-                                        <span class="name">电压{{num+1}}</span>
+                                        <span class="name">{{subitem.depaVname}}电压</span>
                                         <van-tag type="primary">{{subitem.dy}}</van-tag>
-                                        <span class="unit" v-if="subitem.unit">V</span>
+                                        <span class="unit" v-if="item.dyUnit">{{item.dyUnit}}</span>
                                     </div>
                                     <div class="item" :key="num+'nz'">
-                                        <span class="name">内阻{{num+1}}</span>
+                                        <span class="name">{{subitem.depaVname}}内阻</span>
                                         <van-tag type="primary">{{subitem.nz}}</van-tag>
-                                        <span class="unit" v-if="subitem.unit">V</span>
+                                        <span class="unit" v-if="subitem.nzUnit">{{item.nzUnit}}</span>
                                     </div>
                                     <div class="item" :key="num+'wd'">
-                                        <span class="name">温度{{num+1}}</span>
+                                        <span class="name">{{subitem.depaVname}}温度</span>
                                         <van-tag type="primary">{{subitem.wd}}</van-tag>
-                                        <span class="unit" v-if="subitem.unit">V</span>
+                                        <span class="unit" v-if="subitem.wdUnit">{{item.wdUnit}}</span>
                                     </div>
                                 </template>
 

@@ -208,7 +208,8 @@ export default {
 
         },
         getWarnData() { // 初始化数据
-            this.get(`/ls_dcim/mobile/getAllWarnorder`, {}).then(({data}) => {
+            let userId = this.$store.getters['login/userId'];
+            this.get(`/ls_dcim/mobile/getAllWarnorder`, {userId: userId}).then(({data}) => {
                 this.acceptTotal = "已受理("+data.acceptTotal+")";
                 this.solveTotal = "已解决("+data.solveTotal+")";
                 this.noAcceptTotal = "待受理("+data.noAcceptTotal+")";

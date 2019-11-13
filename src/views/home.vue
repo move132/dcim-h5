@@ -76,7 +76,8 @@ export default {
             this.router.push({ name: "motorroom", query: {macrId: item.macrId, macrName: item.macrName}});
         },
         getAreaList() { // 区域
-            return this.get(`/ls_dcim/mobile/getAreaList`, {}).then(({data})=> {
+            let userId = this.$store.getters['login/userId'];
+            return this.get(`/ls_dcim/mobile/getAreaList`, {userId: userId}).then(({data})=> {
                 let list = [];
                 for (let i = 0; i < data.length; i++) {
                     const element = data[i];
@@ -87,6 +88,8 @@ export default {
             })
         },
         getMacroom(param) {
+            let userId = this.$store.getters['login/userId'];
+            param.userId = userId;
             this.get(`/ls_dcim/mobile/getMacroomByAreaId`, param).then(({data})=> {
                 this.engineList = data;
             }).catch(({data}) => {
@@ -94,7 +97,8 @@ export default {
             });
         },
         getPendingWarn() { // 获取待处理报警
-            this.get(`/ls_dcim/mobile/getPendingWarn`, {}).then(({data})=> {
+            let userId = this.$store.getters['login/userId'];
+            this.get(`/ls_dcim/mobile/getPendingWarn`, {userId: userId}).then(({data})=> {
                 this.count = data.count;
                 this.workorders = data.workorders;
             })
