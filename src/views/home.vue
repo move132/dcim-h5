@@ -77,6 +77,7 @@ export default {
         },
         getAreaList() { // 区域
             let userId = this.$store.getters['login/userId'];
+            let areaCache = this.$store.getters['index/areaCache'];
             return this.get(`/ls_dcim/mobile/getAreaList`, {userId: userId}).then(({data})=> {
                 let list = [];
                 for (let i = 0; i < data.length; i++) {
@@ -84,7 +85,7 @@ export default {
                     list.push({ text: element.areaName, value: element.areaId });
                 }
                 this.areaList = list;
-                this.areavalue = list[0].value;
+                this.areavalue = areaCache ? areaCache : list[0].value;
             })
         },
         getMacroom(param) {
@@ -106,6 +107,7 @@ export default {
         dropdownChange(e) {
             let parm = { areaId: e};
             this.getMacroom(parm);
+            this.$store.dispatch("index/areaCache", e);
         },
         onLoad() {
             // 异步更新数据

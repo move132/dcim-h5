@@ -1,12 +1,10 @@
 <template>
-<!-- 配电柜 -->
+<!-- 配电柜开关 -->
     <div class="power">
-        <div class="power-header">运行参数</div>
         <div class="power-list">
             <div class="item" v-for="(item, index) in dataList" :key="index">
                 <span class="name">{{item.name}}</span>
-                <van-tag type="primary">运行</van-tag>
-                <span v-if="item.unit">{{item.unit}}</span>
+                <van-tag :type="item.value ==='0' || item.value ==='0.0' ? 'success':'danger'">{{item.value === "0" || item.value === "0.0" ? "闭合" : "断开"}}</van-tag>
             </div>
         </div>
     </div>
@@ -26,13 +24,12 @@ export default {
         this.getDataList();
     },
     activated() {
-
     },
     computed: {},
     methods: {
         getDataList() {
             let param = {
-                deviId: this.queryParam.deviId // 设备编号"
+                deviId: this.queryParam.deviId // 设备类型编号"
             };
             this.get(`/ls_dcim/mobile/getDeviceDataByDeviId`, param).then(({data}) => {
                 this.dataList = data.runParamList;

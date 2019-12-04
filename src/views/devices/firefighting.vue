@@ -1,10 +1,10 @@
 <template>
-    <!-- 照明 -->
+    <!-- 消防 -->
     <div class="power">
         <div class="power-list">
             <div class="tag">
-                <div>开启<img src="../../assets/device/lighting_open.png" alt /></div>
-                <div>关闭<img src="../../assets/device/lighting_close.png" alt /></div>
+                <div>正常<img src="../../assets/device/fire_nomal.png" alt /></div>
+                <div>报警<img src="../../assets/device/fire_warn.png" alt /></div>
             </div>
             <div class="device-img">
                 <img src="http://211.149.155.20:8080/ls_dcim/static/img/room/thumb/36bec2150bce47a0b72294216c3b3dbd.png" alt="">

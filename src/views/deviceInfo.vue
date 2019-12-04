@@ -51,12 +51,16 @@
             <illumine v-else-if="queryParam.detyName === '照明'" ref="zm"></illumine>
             <battery v-else-if="queryParam.detyName === '电池'" ref="dc"></battery>
             <accesscontrol v-else-if="queryParam.detyName === '门禁'"  ref="mj"></accesscontrol>
-            <newsletter-status v-else-if="queryParam.detyName === '通讯设备状态'"  ref="txzt" ></newsletter-status>
-           <!--  <battery ref="battery"></battery> -->
-            <!-- <accesscontrol ref="accesscontrol"  data-type="门禁"></accesscontrol> -->
-            <!-- <correctcond ref="correctcond"></correctcond> -->
-            <!-- <powercabinet ref="powercabinet"></powercabinet> -->
-            <!-- <newsletter-status ref="newsletterstatus" data-type="通讯设备状态"></newsletter-status> -->
+            <newsletter-status v-else-if="queryParam.detyName === '通讯状态'"  ref="txzt" ></newsletter-status>
+
+
+            <ordinaryair v-else-if="queryParam.detyName === '普通空调'" ref="ptkt"></ordinaryair>  <!-- 普通空调 -->
+            <correctcond v-else-if="queryParam.detyName === '空调'" ref="jmkt"></correctcond>  <!-- 精密空调 -->
+            <powercabinet v-else-if="queryParam.detyName === '配电柜'" ref="pdg"></powercabinet>  <!-- 配电柜 -->
+            <powercabinetswitch v-else-if="queryParam.detyName === '配电柜开关'" ref="pdgkg"></powercabinetswitch>  <!-- 配电柜开关 -->
+            <!-- <newsletter-status></newsletter-status> -->
+            <!-- <firefighting v-else-if="queryParam.detyName === '消防'" ref="xf"></firefighting> -->  <!-- 消防 -->
+            <!-- <firefighting></firefighting> -->
             <!--
                 温湿度：wsd
                 烟感：yg
@@ -91,7 +95,9 @@ import accesscontrol from "./devices/access_control";
 import correctcond from "./devices/correct_cond";
 import powercabinet from "./devices/power_cabinet";
 import newsletterStatus from "./devices/newsletter_status";
-
+import ordinaryair from "./devices/ordinaryair";
+import powercabinetswitch from "./devices/power_cabinet_switch"
+import firefighting from "./devices/firefighting"
 export default {
     data() {
         return {
@@ -113,7 +119,10 @@ export default {
         accesscontrol,
         correctcond,
         powercabinet,
-        newsletterStatus
+        newsletterStatus,
+        ordinaryair,
+        powercabinetswitch,
+        firefighting
     },
     activated() {
 

@@ -19,10 +19,10 @@
             </van-tab>
             <van-tab title="部件状态">
                 <div class="d-box mgt10">
-                    <Nodata v-if="warnStatuList.length === 0"></Nodata>
-                    <div :class="['item', {'red': item.value ==='1'}]" v-for="(item, index) in warnStatuList" :key="index">
+                    <Nodata v-if="unitStatuList.length === 0"></Nodata>
+                    <div :class="['item', {'red': item.value ==='1' || item.value ==='1.0'}]" v-for="(item, index) in unitStatuList" :key="index">
                         <span class="name">{{item.name}}</span>
-                        <van-tag :type="item.value ==='0' ?'success':'danger'">{{item.value === "0" ? "正常" : "故障"}}</van-tag>
+                        <van-tag :type="item.value ==='0' || item.value ==='0.0' ? 'danger':'success'">{{item.value === "0" || item.value === "0.0" ? "闭合" : "断开"}}</van-tag>
                         <span class="unit" v-if="item.unit">{{item.unit}}</span>
                     </div>
                 </div>
@@ -30,9 +30,9 @@
             <van-tab title="报警状态">
                 <div class="d-box mgt10">
                     <Nodata v-if="warnStatuList.length === 0"></Nodata>
-                    <div :class="['item', {'red': item.value ==='1'}]" v-for="(item, index) in warnStatuList" :key="index">
+                    <div :class="['item', {'red': item.value ==='1' || item.value ==='1.0'}]" v-for="(item, index) in warnStatuList" :key="index">
                         <span class="name">{{item.name}}</span>
-                        <van-tag :type="item.value ==='0' ?'success':'danger'">{{item.value === "0" ? "正常" : "故障"}}</van-tag>
+                        <van-tag :type="item.value ==='0' || item.value ==='0.0' ? 'success':'danger'">{{item.value === "0" || item.value === "0.0" ? "闭合" : "断开"}}</van-tag>
                         <span class="unit" v-if="item.unit">{{item.unit}}</span>
                     </div>
                 </div>
@@ -46,8 +46,9 @@ import Nodata from '@/components/Nodata';
 export default {
     data() {
         return {
-            runParamList: [],
-            warnStatuList: []
+            runParamList: [], // 运行参数
+            unitStatuList: [], // 部件状态
+            warnStatuList: [] // 报警状态
         }
     },
     components: {
@@ -55,10 +56,10 @@ export default {
     },
     created() {
 		this.queryParam = this.$router.currentRoute.query;
-
+        this.getDeviceListByParam();
 	},
   	activated() {
-    	this.getDeviceListByParam();
+
   	},
     computed: {},
     methods: {
@@ -66,7 +67,14 @@ export default {
             this.$router.go(-1);
         },
         getDeviceListByParam() {
-
+            let param = {
+                deviId: this.queryParam.deviId // 设备类型编号"
+            };
+            this.get(`/ls_dcim/mobile/getDeviceDataByDeviId`, param).then(({data}) => {
+                this.runParamList = data.runParamList;
+                this.unitStatuList = data.unitStatuList;
+                this.warnStatuList = data.warnStatuList;
+            })
         }
     }
 };
