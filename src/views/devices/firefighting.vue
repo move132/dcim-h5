@@ -62,6 +62,7 @@ export default {
     display: flex;
     justify-items: center;
     justify-content: flex-end;
+    padding-bottom: 15px;
     div {
         display: flex;
         justify-items: center;

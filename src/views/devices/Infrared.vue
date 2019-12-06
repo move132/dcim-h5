@@ -6,8 +6,16 @@
                 <div>正常<img src="../../assets/device/infrared_nomal.png" alt /></div>
                 <div>报警<img src="../../assets/device/infrared_warn.png" alt /></div>
             </div>
-            <div class="device-img">
-                <img src="http://211.149.155.20:8080/ls_dcim/static/img/room/thumb/36bec2150bce47a0b72294216c3b3dbd.png" alt="">
+            <div class="device-box">
+               <!--  <img src="http://211.149.155.20:8080/ls_dcim/static/img/room/3d/a005ea1e458f491c875e8334944d9a92.png" alt=""> -->
+                <!-- <canvas id="canvas" style="width: 100%;"></canvas> -->
+                <div class="infr-img-wrap" :style="{'background-image': 'url('+img+')', zoom: zoom}">
+                    <div v-for="(item, index) in dataList" :key="index"
+                        :class="['point',{nomal: item.warn === '0' || item.warn === '0.0'},{warn: item.warn === '1' || item.warn === '1.0'}]"
+                        :style="{left: item.deviX +'px', top: item.deviY +'px', transform: 'scale('+(1/zoom)+')'}">
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -17,6 +25,8 @@
 export default {
     data() {
         return {
+            img: "http://211.149.155.20:8080/ls_dcim/static/img/room/3d/a005ea1e458f491c875e8334944d9a92.png",
+            macrMobileimg: "",
             dataList: []
         };
     },
@@ -26,18 +36,38 @@ export default {
         this.getDataList();
     },
     activated() {},
-    computed: {},
+    computed: {
+        zoom() { // 获取相对屏幕大小的比率
+            return document.body.clientWidth / 1000;
+        },
+        imgHiehgt() {
+            let zoom = document.body.clientWidth / 1000;
+            return 600 * zoom;
+        }
+    },
     methods: {
         getDataList() {
             let param = {
                 macrId: this.queryParam.macrId, // 机房编号
                 detyId: this.queryParam.detyId // 设备编号
             };
-            this.get(`/ls_dcim/mobile/getDeviceDateByParam`, param).then(
-                ({ data }) => {
-                    this.dataList = data.runParamList;
+            this.get(`/ls_dcim/mobile/getDeviceDateByParam`, param).then(({ data }) => {
+                if (data.length > 0) {
+                    let macrMobileimg = data[0].device.macrMobileimg;
+                    let list = [];
+
+                    data.forEach(item => {
+                        list.push({
+                            warn: item.warn,
+                            deviX: (item.device.deviX ), //  计算100百分比 （pc后端相对是对 1000x600 的图片定对的）
+                            deviY: (item.device.deviY )
+                        })
+                    });
+                    this.macrMobileimg = macrMobileimg;
+                    this.dataList = list;
+                    // this.drawCanvas(macrMobileimg)
                 }
-            );
+            });
         }
     }
 };
@@ -46,7 +76,7 @@ export default {
 <style scoped lang="scss">
 .power {
     padding-bottom: 100px;
-    padding-top: 21px;
+    padding-top: 30px;
 }
 .power-header {
     padding: 10px;
@@ -62,6 +92,7 @@ export default {
     display: flex;
     justify-items: center;
     justify-content: flex-end;
+    padding: 10px 0;
     div {
         display: flex;
         justify-items: center;
@@ -75,10 +106,50 @@ export default {
         margin-left: 5px;
     }
 }
-.device-img {
+.device-box {
     text-align: center;
-    img {
+    position: relative;
+    .device-img-wrap {
         width: 100%;
+        overflow: hidden;
+        .device-img {
+            width: 1000px;
+            height: 600px;
+            img {
+
+            }
+        }
+    }
+    .point {
+        position: absolute;
+        img {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+        }
+    }
+}
+.infr-img-wrap {
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center center;
+    width: 1000px;
+    height: 600px;
+    .point {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        margin-left: 20px;
+        margin-top: 20px;
+        &.nomal {
+            background: url(../../assets/device/infrared_nomal.png) no-repeat;
+            background-size: 100% 100%;
+        }
+        &.warn {
+            background: url(../../assets/device/infrared_warn.png) no-repeat;
+            background-size: 100% 100%;
+        }
     }
 }
 </style>

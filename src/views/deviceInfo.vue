@@ -42,7 +42,7 @@
             <ups v-if="queryParam.detyName === 'UPS'" ref="ups"></ups>
             <humidity v-else-if="queryParam.detyName === '温湿度'" ref="wsd"></humidity>
 
-            <smoke v-else-if="queryParam.detyName === '烟感'" ref="yg"></smoke>
+            <!-- <smoke v-else-if="queryParam.detyName === '烟感'" ref="yg"></smoke> -->
 
             <Infrared v-else-if="queryParam.detyName === '红外'" ref="hw"></Infrared>
 
@@ -50,6 +50,7 @@
 
             <illumine v-else-if="queryParam.detyName === '照明'" ref="zm"></illumine>
             <battery v-else-if="queryParam.detyName === '电池'" ref="dc"></battery>
+            <firefighting v-else-if="queryParam.detyName === '烟感'" ref="xf"></firefighting> <!-- 消防 -->
             <accesscontrol v-else-if="queryParam.detyName === '门禁'"  ref="mj"></accesscontrol>
             <newsletter-status v-else-if="queryParam.detyName === '通讯状态'"  ref="txzt" ></newsletter-status>
 
@@ -59,7 +60,7 @@
             <powercabinet v-else-if="queryParam.detyName === '配电柜'" ref="pdg"></powercabinet>  <!-- 配电柜 -->
             <powercabinetswitch v-else-if="queryParam.detyName === '配电柜开关'" ref="pdgkg"></powercabinetswitch>  <!-- 配电柜开关 -->
             <!-- <newsletter-status></newsletter-status> -->
-            <!-- <firefighting v-else-if="queryParam.detyName === '消防'" ref="xf"></firefighting> -->  <!-- 消防 -->
+            <!-- <firefighting v-else-if="queryParam.detyName === '烟感'" ref="xf"></firefighting> -->  <!-- 消防 -->
             <!-- <firefighting></firefighting> -->
             <!--
                 温湿度：wsd
