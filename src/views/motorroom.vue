@@ -52,7 +52,7 @@ export default {
 
 <style scoped lang="scss">
 .device {
-    padding-top: 70px;
+    padding-top: 56px;
     padding-bottom: 100px;
     display: flex;
     flex-wrap: wrap;
