@@ -48,7 +48,7 @@ export default {
                 if (data.length > 0) {
                     let macrMobileimg = data[0].device.macrMobileimg;
                     let list = [];
-
+alert(22)
                     data.forEach(item => {
                         list.push({
                             warn: item.warn,
