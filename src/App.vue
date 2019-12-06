@@ -45,7 +45,7 @@ h3 {
 }
 
 .router {
-    width: 100%;
+    /* width: 100%;
     height: 100%;
     height: 100vh;
     overflow: scroll;
@@ -58,6 +58,6 @@ h3 {
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: #f2f2f2;
+    background-color: #f2f2f2; */
 }
 </style>
