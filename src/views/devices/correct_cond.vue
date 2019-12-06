@@ -12,8 +12,10 @@
                     <Nodata v-if="runParamList.length === 0"></Nodata>
                     <div class="item" v-for="(item, index) in runParamList" :key="index">
                         <span class="name">{{item.name}}</span>
-                        <van-tag type="primary">{{item.value}}</van-tag>
-                        <span class="unit" v-if="item.unit">{{item.unit}}</span>
+                        <span class="value">
+                            <van-tag type="primary">{{item.value}}</van-tag>
+                            <span class="unit" v-if="item.unit">{{item.unit}}</span>
+                        </span>
                     </div>
                 </div>
             </van-tab>
@@ -22,8 +24,10 @@
                     <Nodata v-if="unitStatuList.length === 0"></Nodata>
                     <div :class="['item', {'red': item.value ==='1' || item.value ==='1.0'}]" v-for="(item, index) in unitStatuList" :key="index">
                         <span class="name">{{item.name}}</span>
-                        <van-tag :type="item.value ==='0' || item.value ==='0.0' ? 'danger':'success'">{{item.value === "0" || item.value === "0.0" ? "闭合" : "断开"}}</van-tag>
-                        <span class="unit" v-if="item.unit">{{item.unit}}</span>
+                        <span class="value">
+                            <van-tag :type="item.value ==='0' || item.value ==='0.0' ? 'danger':'success'">{{item.value === "0" || item.value === "0.0" ? "闭合" : "断开"}}</van-tag>
+                            <span class="unit" v-if="item.unit">{{item.unit}}</span>
+                        </span>
                     </div>
                 </div>
             </van-tab>
@@ -32,8 +36,10 @@
                     <Nodata v-if="warnStatuList.length === 0"></Nodata>
                     <div :class="['item', {'red': item.value ==='1' || item.value ==='1.0'}]" v-for="(item, index) in warnStatuList" :key="index">
                         <span class="name">{{item.name}}</span>
-                        <van-tag :type="item.value ==='0' || item.value ==='0.0' ? 'success':'danger'">{{item.value === "0" || item.value === "0.0" ? "闭合" : "断开"}}</van-tag>
-                        <span class="unit" v-if="item.unit">{{item.unit}}</span>
+                        <span class="value">
+                            <van-tag :type="item.value ==='0' || item.value ==='0.0' ? 'success':'danger'">{{item.value === "0" || item.value === "0.0" ? "闭合" : "断开"}}</van-tag>
+                            <span class="unit" v-if="item.unit">{{item.unit}}</span>
+                        </span>
                     </div>
                 </div>
             </van-tab>
@@ -108,10 +114,15 @@ export default {
     .name {
         display: inline-block;
         text-align: right;
-        width: 70%;
+        width: 65%;
+    }
+    .value {
+        display: inline-block;
+        width: 35%;
     }
     .unit {
         color: #999;
+        font-size: 12px;
     }
 }
 </style>
