@@ -48,8 +48,7 @@ export default {
 <style scoped lang="scss">
 
 .control {
-    padding-bottom: 100px;
-    padding-top: 30px;
+    padding-top: 10px;
 }
 .control-item {
     background: #fff;

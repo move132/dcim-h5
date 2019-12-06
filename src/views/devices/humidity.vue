@@ -2,6 +2,14 @@
 <template>
     <div>
         <div class="humidity">
+            <div class="device-box">
+                <div class="deviceimg-wrap" :style="{'background-image': 'url('+macrMobileimg+')', zoom: zoom}">
+                    <div v-for="(item, index) in dataPointList" :key="index"
+                        :class="['point',{nomal: item.warn === '0' || item.warn === '0.0'},{warn: item.warn === '1' || item.warn === '1.0'}]"
+                        :style="{left: item.deviX +'px', top: item.deviY +'px', transform: 'scale('+(1/zoom)+')'}">
+                    </div>
+                </div>
+            </div>
             <div class="humidity-list">
                 <div
                     v-for="(item, index) in datalist"
@@ -27,6 +35,8 @@ import Tabbar from "@/components/Tabbar";
 export default {
     data() {
         return {
+            macrMobileimg: "",
+            dataPointList: [],
             datalist: []
         };
     },
@@ -40,7 +50,11 @@ export default {
     activated() {
         this.getDataList();
     },
-    computed: {},
+    computed: {
+        zoom() { // 获取相对屏幕大小的比率
+            return document.body.clientWidth / 1000; // 后台按照1000排序尺寸计算的坐标
+        }
+    },
     methods: {
         onClickLeft() {
             this.$router.go(-1);
@@ -51,28 +65,25 @@ export default {
                 macrId: this.queryParam.macrId, // 机房编号
                 detyId: this.queryParam.detyId // 设备类型编号"
             };
-            this.get(`/ls_dcim/mobile/getDeviceDateByParam`, param).then(
-                ({ data }) => {
+            this.get(`/ls_dcim/mobile/getDeviceDateByParam`, param).then(({ data }) => {
+                if (data.length > 0) {
+                    let macrMobileimg = data[0].device.macrMobileimg;
+                    let list = [];
                     let tempdata = [];
-                    for (let i = 0; i < data.length; i++) {
-                        const element = data[i];
-                        /* element.dataList =  [{
-						"warn":"1",
-						"prefix":"WD",
-						"name":"温度",
-						"value":"28.87"
-					},
-					{
-						"warn":"0",
-						"prefix":"SD",
-						"name":"湿度",
-						"value":"51.89"
-					}] */
-                        tempdata.push(element);
-                    }
-                    this.datalist = tempdata;
+                    data.forEach(item => {
+                        list.push({
+                            warn: item.warn,
+                            deviX: item.device.deviX,
+                            deviY: item.device.deviY,
+                            deviName: item.device.deviName
+                        })
+                        tempdata.push(item);
+                    });
+                    this.macrMobileimg = macrMobileimg;
+                    this.dataPointList = list;
+                    this.datalist = tempdata
                 }
-            );
+            });
         },
         refresh() {
             this.getDataList();
@@ -83,8 +94,7 @@ export default {
 
 <style scoped lang="scss">
 .humidity {
-    padding-bottom: 100px;
-    padding-top: 30px;
+    margin-top: 10px;
 }
 .humidity-list {
     display: flex;
@@ -119,6 +129,44 @@ export default {
                 color: #e82f2f;
                 background: #eedadb;
             }
+        }
+    }
+}
+.deviceimg-wrap {
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center center;
+    width: 1000px;
+    height: 600px;
+    .point {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        margin-left: 20px;
+        margin-top: 20px;
+        &.nomal {
+            background: url(../../assets/device/lighting_open.png) no-repeat;
+            background-size: 100% 100%;
+        }
+        &.warn {
+            background: url(../../assets/device/lighting_close.png) no-repeat;
+            background-size: 100% 100%;
+        }
+        span {
+            color: #fff;
+            width: 150px;
+            position: absolute;
+            top: -8px;
+            left: -30px;
+            font-size: 12px;
+            display: inline-block;
+            overflow: hidden;
+            -o-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            word-break: keep-all;
+            word-wrap: normal
         }
     }
 }

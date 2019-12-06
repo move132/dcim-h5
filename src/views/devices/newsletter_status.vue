@@ -54,8 +54,7 @@ export default {
 
 <style scoped lang="scss">
 .letter {
-    padding-bottom: 100px;
-    padding-top: 21px;
+    padding-top: 10px;
 }
 .letter-list {
     overflow: hidden;

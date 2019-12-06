@@ -6,22 +6,20 @@
                 <div class="info">
                     <div class="fild">
                         <div>
-                            <span class="label">电池电压：</span>
-                            <span class="val">{{dataList[0].dy?dataList[0].dy:'--'}}</span>
+                            <span class="label">总电压：</span>
+                            <span class="val">{{dataList[0].zdy+dataList[0].zdyUnit}}</span>
                         </div>
                         <div>
-                            <span class="label">温度：</span>
-                            <span class="val">{{dataList[0].wd?dataList[0].wd:'--'}}</span>
+                            <span class="label">总电流：</span>
+                            <span class="val">{{dataList[0].zdl+dataList[0].zdlUnit}}</span>
                         </div>
                     </div>
                     <div class="fild">
                         <div>
-                            <span class="label">电池电流：</span>
-                            <span class="val">{{dataList[0].dl?dataList[0].dl:'--'}}</span>
-                        </div>
-                        <div>
-                            <span class="label">内阻：</span>
-                            <span class="val">{{dataList[0].nz?dataList[0].nz:'--'}}</span>
+                            <span class="label">报警状态：</span>
+                            <span class="val">
+                                <van-tag :type="dataList[0].dcbj ==='0' || dataList[0].dcbj ==='0.0' ?'success':'danger'">{{dataList[0].dcbj==="1"|| dataList[0].dcbj==="1.0"?'报警':'正常'}}</van-tag>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -81,7 +79,6 @@ export default {
         this.getDataList();
     },
     activated() {
-        this.getDataList();
     },
     computed: {},
     methods: {
@@ -94,9 +91,6 @@ export default {
             this.get(`/ls_dcim/mobile/getDCByParam`, param).then(({ data }) => {
                 this.dataList = data;
             });
-        },
-        refresh() {
-            this.getDataList();
         }
     }
 };
@@ -105,8 +99,7 @@ export default {
 <style scoped lang="scss">
 
 .battery {
-    padding-bottom: 100px;
-    padding-top: 30px;
+    padding-top: 10px;
 }
 .coll-list {
     padding: 10px 0;

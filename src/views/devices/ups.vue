@@ -13,9 +13,11 @@
                 <div class="d-box mgt10">
                     <Nodata v-if="runParamList.length === 0"></Nodata>
                     <div class="item" v-for="(item, index) in runParamList" :key="index">
-                        <span class="name">{{item.name}}</span>
-                        <van-tag type="primary">{{item.value}}</van-tag>
-                        <span class="unit" v-if="item.unit">{{item.unit}}</span>
+                        <span class="name ellipsis">{{item.name}}</span>
+                        <span class="value">
+                            <van-tag type="primary">{{item.value}}</van-tag>
+                            <span class="unit" v-if="item.unit">{{item.unit}}</span>
+                        </span>
                     </div>
                 </div>
             </van-tab>
@@ -23,9 +25,11 @@
                 <div class="d-box mgt10">
                     <Nodata v-if="warnStatuList.length === 0"></Nodata>
                     <div :class="['item', {'red': item.value ==='1'}]" v-for="(item, index) in warnStatuList" :key="index">
-                        <span class="name">{{item.name}}</span>
-                        <van-tag :type="item.value ==='0' ?'success':'danger'">{{item.value === "0" ? "正常" : "故障"}}</van-tag>
-                        <span class="unit" v-if="item.unit">{{item.unit}}</span>
+                        <span class="name ellipsis">{{item.name}}</span>
+                        <span class="value">
+                            <van-tag :type="item.value ==='0' ?'success':'danger'">{{item.value === "0" ? "正常" : "故障"}}</van-tag>
+                            <span class="unit" v-if="item.unit">{{item.unit}}</span>
+                        </span>
                     </div>
                 </div>
             </van-tab>
@@ -112,7 +116,7 @@ export default {
 
 <style scoped lang="scss">
     .drop-top {
-        margin-top: 30px;
+        margin-top: 10px;
         height: 35px;
     }
     .d-box {
@@ -121,10 +125,11 @@ export default {
     }
     .item {
         border-bottom: 1px solid #eee;
-        padding: 10px;
+        padding: 10px 0;
         width: 50%;
         float: left;
         box-sizing: border-box;
+        display: flex;
         &.red {
             color: red;
         }
@@ -135,10 +140,15 @@ export default {
         .name {
             display: inline-block;
             text-align: right;
-            width: 70%;
+            width: 68%;
+        }
+        .value {
+            display: inline-block;
+            width: 32%;
         }
         .unit {
             color: #999;
+            font-size: 12px;
         }
     }
 
