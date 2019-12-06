@@ -1,6 +1,6 @@
 
 <template>
-    <div>
+    <div class="roombox">
         <van-nav-bar class="dc-topbar" fixed :title="title" left-arrow @click-left="onClickLeft" />
         <div class="device">
             <Nodata v-if="deviceList.length === 0"></Nodata>
@@ -51,6 +51,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.roombox {
+    margin-top: 10px;
+}
 .device {
     padding-top: 56px;
     padding-bottom: 100px;

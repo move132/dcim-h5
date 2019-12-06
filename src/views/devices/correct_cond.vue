@@ -81,6 +81,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.cond {
+    margin-top: 10px;
+}
 .drop-top {
     margin-top: 30px;
     height: 35px;
