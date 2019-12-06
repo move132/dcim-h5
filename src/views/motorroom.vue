@@ -1,7 +1,7 @@
 
 <template>
     <div>
-        <van-nav-bar fixed :title="title" left-arrow @click-left="onClickLeft" />
+        <van-nav-bar class="dc-topbar" fixed :title="title" left-arrow @click-left="onClickLeft" />
         <div class="device">
             <Nodata v-if="deviceList.length === 0"></Nodata>
             <div class="device-item" v-for="(item, index) in deviceList" :key="index" @click="deviceInfo(item)">

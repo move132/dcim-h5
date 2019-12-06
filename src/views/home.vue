@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <van-nav-bar fixed title="首页" />
+        <van-nav-bar fixed title="首页" class="dc-topbar"/>
         <div class="center-list">
             <div class="center-header">
                 <van-row class="row">

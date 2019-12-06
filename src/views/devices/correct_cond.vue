@@ -81,39 +81,34 @@ export default {
 </script>
 
 <style scoped lang="scss">
-    .cond {
-        padding-bottom: 100px;
-        padding-top: 30px;
+.drop-top {
+    margin-top: 30px;
+    height: 35px;
+}
+.d-box {
+    overflow: hidden;
+    background: #fff;
+}
+.item {
+    border-bottom: 1px solid #eee;
+    padding: 10px;
+    width: 50%;
+    float: left;
+    box-sizing: border-box;
+    &.red {
+        color: red;
     }
-    .drop-top {
-        margin-top: 30px;
-        height: 35px;
+    .van-tag {
+        margin: 0 0 0 5px;
+        text-align: left;
     }
-    .d-box {
-        overflow: hidden;
-        background: #fff;
+    .name {
+        display: inline-block;
+        text-align: right;
+        width: 70%;
     }
-    .item {
-        border-bottom: 1px solid #eee;
-        padding: 10px;
-        width: 50%;
-        float: left;
-        box-sizing: border-box;
-        &.red {
-            color: red;
-        }
-        .van-tag {
-            margin: 0 0 0 5px;
-            text-align: left;
-        }
-        .name {
-            display: inline-block;
-            text-align: right;
-            width: 70%;
-        }
-        .unit {
-            color: #999;
-        }
+    .unit {
+        color: #999;
     }
-
+}
 </style>

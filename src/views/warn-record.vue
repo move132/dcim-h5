@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <van-nav-bar fixed title="报警记录" />
+    <van-nav-bar class="dc-topbar" fixed title="报警记录" />
     <div class="wrap">
         <van-tabs v-model="active" title-active-color="#00A0E8" color="#00A0E8" title-inactive-color="#333">
             <van-tab :title="noAcceptTotal">

@@ -1,7 +1,7 @@
 
 <template>
     <div>
-        <van-nav-bar title="我受理的报警" fixed left-arrow @click-left="onClickLeft" />
+        <van-nav-bar class="dc-topbar" title="我受理的报警" fixed left-arrow @click-left="onClickLeft" />
         <div class="wrap">
             <Nodata v-if="warnList.length === 0"></Nodata>
             <div class="warn-list" v-if="!isnodata">

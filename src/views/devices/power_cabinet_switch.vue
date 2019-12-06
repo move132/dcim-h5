@@ -41,10 +41,6 @@ export default {
 
 <style scoped lang="scss">
 
-.power {
-    padding-bottom: 100px;
-    padding-top: 21px;
-}
 .power-header {
     padding: 10px;
     background: #00A0E9;

@@ -66,10 +66,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.power {
-    padding-bottom: 100px;
-    padding-top: 30px;
-}
 .power-header {
     padding: 10px;
     background: #00a0e9;

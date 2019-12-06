@@ -1,7 +1,7 @@
 
 <template>
     <div>
-        <van-nav-bar :title="macrName+'-'+title" fixed left-arrow @click-left="onClickLeft" >
+        <van-nav-bar class="dc-topbar" :title="macrName+'-'+title" fixed left-arrow @click-left="onClickLeft" >
 
         </van-nav-bar>
         <div class="wrap">
@@ -180,7 +180,7 @@ export default {
 
 <style scoped lang="scss">
 .wrap {
-    padding-top: 25px;
+    padding-top: 46px;
     padding-bottom: 140px;
     overflow: hidden;
     .row {
