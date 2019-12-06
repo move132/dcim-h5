@@ -7,13 +7,10 @@
                 <div>报警<img src="../../assets/device/infrared_warn.png" alt /></div>
             </div>
             <div class="device-box">
-               <!--  <img src="http://211.149.155.20:8080/ls_dcim/static/img/room/3d/a005ea1e458f491c875e8334944d9a92.png" alt=""> -->
-                <!-- <canvas id="canvas" style="width: 100%;"></canvas> -->
-                <div class="infr-img-wrap" :style="{'background-image': 'url('+img+')', zoom: zoom}">
+                <div class="deviceimg-wrap" :style="{'background-image': 'url('+ macrMobileimg +')', zoom: zoom}">
                     <div v-for="(item, index) in dataList" :key="index"
                         :class="['point',{nomal: item.warn === '0' || item.warn === '0.0'},{warn: item.warn === '1' || item.warn === '1.0'}]"
                         :style="{left: item.deviX +'px', top: item.deviY +'px', transform: 'scale('+(1/zoom)+')'}">
-
                     </div>
                 </div>
             </div>
@@ -39,10 +36,6 @@ export default {
     computed: {
         zoom() { // 获取相对屏幕大小的比率
             return document.body.clientWidth / 1000;
-        },
-        imgHiehgt() {
-            let zoom = document.body.clientWidth / 1000;
-            return 600 * zoom;
         }
     },
     methods: {
@@ -59,13 +52,12 @@ export default {
                     data.forEach(item => {
                         list.push({
                             warn: item.warn,
-                            deviX: (item.device.deviX ), //  计算100百分比 （pc后端相对是对 1000x600 的图片定对的）
-                            deviY: (item.device.deviY )
+                            deviX: item.device.deviX,
+                            deviY: item.device.deviY
                         })
                     });
                     this.macrMobileimg = macrMobileimg;
                     this.dataList = list;
-                    // this.drawCanvas(macrMobileimg)
                 }
             });
         }
@@ -106,30 +98,8 @@ export default {
         margin-left: 5px;
     }
 }
-.device-box {
-    text-align: center;
-    position: relative;
-    .device-img-wrap {
-        width: 100%;
-        overflow: hidden;
-        .device-img {
-            width: 1000px;
-            height: 600px;
-            img {
 
-            }
-        }
-    }
-    .point {
-        position: absolute;
-        img {
-            width: 20px;
-            height: 20px;
-            vertical-align: middle;
-        }
-    }
-}
-.infr-img-wrap {
+.deviceimg-wrap {
     position: relative;
     background-repeat: no-repeat;
     background-size: 100% 100%;

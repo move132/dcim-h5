@@ -6,17 +6,23 @@
                 <div>正常<img src="../../assets/device/fire_nomal.png" alt /></div>
                 <div>报警<img src="../../assets/device/fire_warn.png" alt /></div>
             </div>
-            <div class="device-img">
-                <img src="http://211.149.155.20:8080/ls_dcim/static/img/room/thumb/36bec2150bce47a0b72294216c3b3dbd.png" alt="">
+            <div class="device-box">
+                <div class="deviceimg-wrap" :style="{'background-image': 'url('+macrMobileimg+')', zoom: zoom}">
+                    <div v-for="(item, index) in dataList" :key="index"
+                        :class="['point',{nomal: item.warn === '0' || item.warn === '0.0'},{warn: item.warn === '1' || item.warn === '1.0'}]"
+                        :style="{left: item.deviX +'px', top: item.deviY +'px', transform: 'scale('+(1/zoom)+')'}">
+                        <!-- <span :style="{transform: 'scale('+ zoom +')'}">{{item.deviName}}</span> -->
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </template>
-
 <script>
 export default {
     data() {
         return {
+            macrMobileimg: "",
             dataList: []
         };
     },
@@ -26,18 +32,34 @@ export default {
         this.getDataList();
     },
     activated() {},
-    computed: {},
+    computed: {
+        zoom() { // 获取相对屏幕大小的比率
+            return document.body.clientWidth / 1000; // 后台按照1000排序尺寸计算的坐标
+        }
+    },
     methods: {
         getDataList() {
             let param = {
                 macrId: this.queryParam.macrId, // 机房编号
                 detyId: this.queryParam.detyId // 设备编号
             };
-            this.get(`/ls_dcim/mobile/getDeviceDateByParam`, param).then(
-                ({ data }) => {
-                    this.dataList = data.runParamList;
+            this.get(`/ls_dcim/mobile/getDeviceDateByParam`, param).then(({ data }) => {
+                if (data.length > 0) {
+                    let macrMobileimg = data[0].device.macrMobileimg;
+                    let list = [];
+
+                    data.forEach(item => {
+                        list.push({
+                            warn: item.warn,
+                            deviX: item.device.deviX,
+                            deviY: item.device.deviY,
+                            deviName: item.device.deviName
+                        })
+                    });
+                    this.macrMobileimg = macrMobileimg;
+                    this.dataList = list;
                 }
-            );
+            });
         }
     }
 };
@@ -46,7 +68,7 @@ export default {
 <style scoped lang="scss">
 .power {
     padding-bottom: 100px;
-    padding-top: 21px;
+    padding-top: 30px;
 }
 .power-header {
     padding: 10px;
@@ -62,7 +84,7 @@ export default {
     display: flex;
     justify-items: center;
     justify-content: flex-end;
-    padding-bottom: 15px;
+    padding: 10px 0;
     div {
         display: flex;
         justify-items: center;
@@ -76,10 +98,43 @@ export default {
         margin-left: 5px;
     }
 }
-.device-img {
-    text-align: center;
-    img {
-        width: 100%;
+
+.deviceimg-wrap {
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center center;
+    width: 1000px;
+    height: 600px;
+    .point {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        margin-left: 20px;
+        margin-top: 20px;
+        &.nomal {
+            background: url(../../assets/device/fire_nomal.png) no-repeat;
+            background-size: 100% 100%;
+        }
+        &.warn {
+            background: url(../../assets/device/fire_warn.png) no-repeat;
+            background-size: 100% 100%;
+        }
+        span {
+            color: #fff;
+            width: 150px;
+            position: absolute;
+            top: -8px;
+            left: -30px;
+            font-size: 12px;
+            display: inline-block;
+            overflow: hidden;
+            -o-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            word-break: keep-all;
+            word-wrap: normal
+        }
     }
 }
 </style>
