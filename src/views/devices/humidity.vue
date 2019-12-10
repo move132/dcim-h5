@@ -7,6 +7,7 @@
                     <div v-for="(item, index) in dataPointList" :key="index"
                         :class="['point',{nomal: item.warn === '0' || item.warn === '0.0'},{warn: item.warn === '1' || item.warn === '1.0'}]"
                         :style="{left: item.deviX +'px', top: item.deviY +'px', transform: 'scale('+(1/zoom)+')'}">
+                        <span>{{getName(item.deviCode)}}</span>
                     </div>
                 </div>
             </div>
@@ -51,6 +52,11 @@ export default {
         this.getDataList();
     },
     computed: {
+        getName() {
+            return (e) => {
+                return e.split('_')[1]
+            }
+        },
         zoom() { // 获取相对屏幕大小的比率
             return document.body.clientWidth / 1000; // 后台按照1000排序尺寸计算的坐标
         }
@@ -73,6 +79,7 @@ export default {
                     data.forEach(item => {
                         list.push({
                             warn: item.warn,
+                            deviCode: item.device.deviCode,
                             deviX: item.device.deviX,
                             deviY: item.device.deviY,
                             deviName: item.device.deviName
@@ -143,19 +150,26 @@ export default {
         position: absolute;
         width: 20px;
         height: 20px;
+        line-height: 20px;
         margin-left: 20px;
         margin-top: 20px;
+        text-align: center;
         &.nomal {
-            background: url(../../assets/device/lighting_open.png) no-repeat;
-            background-size: 100% 100%;
+            /* background: url(../../assets/device/lighting_open.png) no-repeat;
+            background-size: 100% 100%; */
+            background: #03a9f5;
+            border-radius: 50%;
         }
         &.warn {
-            background: url(../../assets/device/lighting_close.png) no-repeat;
-            background-size: 100% 100%;
+            /* background: url(../../assets/device/lighting_close.png) no-repeat;
+            background-size: 100% 100%; */
+            background: #EA4E3D;
+            border-radius: 50%;
         }
         span {
             color: #fff;
-            width: 150px;
+            font-size: 12px;
+            /* width: 150px;
             position: absolute;
             top: -8px;
             left: -30px;
@@ -166,7 +180,7 @@ export default {
             text-overflow: ellipsis;
             white-space: nowrap;
             word-break: keep-all;
-            word-wrap: normal
+            word-wrap: normal */
         }
     }
 }
