@@ -76,7 +76,7 @@ export default {
 </script>
 <style scoped lang="scss">
 .login {
-    background: #191c2c url(~assets/login_bg.png) no-repeat center bottom;
+    background: #7368ED url(~assets/login_bg.png) no-repeat center bottom;
     background-size: 100%;
     color: #fff;
     height: 100vh;
