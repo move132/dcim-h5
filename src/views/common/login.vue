@@ -103,8 +103,7 @@ export default {
         box-sizing: border-box;
         .top-text {
             font-size: 18px;
-            display: flex;
-            justify-content: center;
+            text-align: center;
             margin-bottom: 15px;
             .h1 {
                 font-size: 18px;

@@ -172,7 +172,7 @@ export default {
         }
         span {
             color: #fff; 
-            font-size: 10px;
+            font-size: 0.2em;
             i {
                 position: absolute;
                 display: flex;
