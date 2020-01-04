@@ -42,7 +42,7 @@
                                 <div class="number">{{index+1}}</div>
                                 <div class="content">
                                     <div class="time">{{item.workFirtime}}</div>
-                                    <div class="tips ellipsis">{{warn(workorders) + warn(workorders)+ warn(workorders)}}</div>
+                                    <div class="tips ellipsis">{{warn(workorders)}}</div>
                                 </div>
                             </div>
                         </van-swipe-item>

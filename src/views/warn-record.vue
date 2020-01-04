@@ -338,8 +338,11 @@ export default {
         color:#333;
         .item {
             padding: 20px 20px 15px 20px;
+            margin: 10px;
+            border-radius: 4px;
             margin-bottom: 5px;
             background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
             .name {
                 margin-bottom: 5px;
             }
