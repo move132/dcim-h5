@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2019-10-20 21:05:14
+ * @LastEditTime: 2020-01-05 01:26:34
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \dcim-h5\src\common\vantui.js
+ */
 import Vue from "vue";
 import {
     Button,
@@ -25,9 +33,12 @@ import {
     Uploader,
     ImagePreview,
     Collapse,
-    CollapseItem
+    CollapseItem,
+    Swipe,
+    SwipeItem
 } from "vant";
 
+Vue.use(Swipe).use(SwipeItem);
 Vue.use(Collapse).use(CollapseItem);
 Vue.use(Button);
 Vue.use(Tabbar);

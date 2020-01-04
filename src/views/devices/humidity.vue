@@ -7,7 +7,10 @@
                     <div v-for="(item, index) in dataPointList" :key="index"
                         :class="['point',{nomal: item.warn === '0' || item.warn === '0.0'},{warn: item.warn === '1' || item.warn === '1.0'}]"
                         :style="{left: item.deviX +'px', top: item.deviY +'px', transform: 'scale('+(1/zoom)+')'}">
-                        <span>{{getName(item.deviCode)}}</span>
+                        <span>
+                            <i>{{getName(item.deviCode)}}</i>
+                            <img src="../../assets/device/humidity.png" alt />
+                        </span>
                     </div>
                 </div>
             </div>
@@ -146,6 +149,7 @@ export default {
     background-position: center center;
     width: 1000px;
     height: 600px;
+    transform-origin: left top;
     .point {
         position: absolute;
         width: 20px;
@@ -167,8 +171,30 @@ export default {
             border-radius: 50%;
         }
         span {
-            color: #fff;
-            font-size: 12px;
+            color: #fff; 
+            font-size: 10px;
+            i {
+                position: absolute;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 1px solid #fff;
+                font-style: normal;
+                width: 26px;
+                height: 26px;
+                line-height: 25px;
+                text-align: center;
+                top: -13px;
+                left: -13px;
+                background: #03a9f5;
+                border-radius: 50%;
+                color: #fff;
+                transform: scale(.5);
+            }
+            img {
+                width: 26px;
+                height: 26px;
+            }
             /* width: 150px;
             position: absolute;
             top: -8px;

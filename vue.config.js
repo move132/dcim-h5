@@ -135,7 +135,8 @@ module.exports = {
         hotOnly: false,
         // 设置代理，用来解决本地开发跨域问题，如果设置了代理，那你本地开发环境的axios的baseUrl要写为 '' ，即空字符串
         // proxy: 'https://easy-mock.com/' // 设置代理
-       // proxy: 'http://www.lionsourceinfo.com'
-       proxy: 'http://211.149.155.20:8080'
+        // proxy: 'http://www.lionsourceinfo.com'
+        proxy: 'http://dcim.fengyingtech.com'
+        // proxy: 'http://211.149.155.20:8080'
     }
 }

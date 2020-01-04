@@ -3,7 +3,7 @@
     <div>
         <div class="battery">
             <template v-if="dataList.length > 0">
-                <div class="info">
+               <!--  <div class="info">
                     <div class="fild">
                         <div>
                             <span class="label">总电压：</span>
@@ -22,7 +22,7 @@
                             </span>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <van-collapse v-model="activeNames">
                     <van-collapse-item :title="item.name" :name="index + 1" v-for="(item, index) in dataList" :key="index">
                         <div class="coll-list">
@@ -35,7 +35,15 @@
                             </template>
                             <template>
                                 <template v-for="(subitem, num) in item.multiData">
-                                    <div class="item" :key="num+'dy'" >
+                                    <div class="bg-iitem" :key='num'>
+                                        <div class="content-flex">
+                                            <div class="number">{{subitem.depaVname}}</div>
+                                            <div>电压: {{subitem.dy}}{{item.dyUnit}}</div>
+                                            <div>内阻: {{subitem.nz}}{{item.nzUnit}}</div>
+                                            <div>温度: {{subitem.wd}}{{item.wdUnit}}</div>
+                                        </div>
+                                    </div>
+                                   <!--  <div class="item" :key="num+'dy'" >
                                         <span class="name">{{subitem.depaVname}}电压</span>
                                         <van-tag type="primary">{{subitem.dy}}</van-tag>
                                         <span class="unit" v-if="item.dyUnit">{{item.dyUnit}}</span>
@@ -49,7 +57,7 @@
                                         <span class="name">{{subitem.depaVname}}温度</span>
                                         <van-tag type="primary">{{subitem.wd}}</van-tag>
                                         <span class="unit" v-if="subitem.wdUnit">{{item.wdUnit}}</span>
-                                    </div>
+                                    </div> -->
                                 </template>
 
                             </template>
@@ -102,8 +110,39 @@ export default {
     padding-top: 10px;
 }
 .coll-list {
-    padding: 10px 0;
+    padding: 10px;
     overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    .bg-iitem {
+        width: 33.333%; 
+        color: #fff;
+        margin: 10px 0;
+        &:nth-child(3n) {
+            .content-flex {
+                margin-right: 0;
+            }
+        } 
+        .content-flex {
+            position: relative;
+            padding: 30px 10px 10px 15px;
+            margin-right: 10px;
+            background: url(../../assets/device/battery.png) no-repeat;
+            background-size: 100% 100%; 
+            .number {
+                position: absolute;
+                background: #fff;
+                color: #03A9F4;
+                padding: 0 10px;
+                top: 7px;
+                left: 50%;
+                transform: translate(-50%, 0);
+                border-radius: 5px;
+                font-size: 12px;
+                line-height: 15px;
+            }
+        }
+    }
 }
 .info {
     display: flex;

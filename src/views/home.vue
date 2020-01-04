@@ -19,20 +19,42 @@
                     <div
                         v-for="(item, index) in engineList"
                         :key="''+index"
-                        class="data-center-list-item"
+                        :class="['data-center-list-item',item.macrId === 7 ? 'is-error': '']"
                         @click="goDevice(item)"
                     >
+                        <van-tag class="tag" v-if='item.macrId === 7' round type="danger">12</van-tag>
                         <van-image fit="cover" height="68" width="100%" :src="item.macrMobileimg"></van-image>
                         <p>{{item.macrName}}</p>
                     </div>
                 </div>
             </div>
             <div class="center-notice">
-                <div class="ellipsis">
-                    待处理警报:<span class="notice-number">{{count}}</span>条
+                <div class="title">
+                    <div class="ellipsis">
+                        待处理警报:<span class="notice-number">{{count}}</span>条
+                    </div>
+                    <div class="line">|</div>
                 </div>
-                <div class="line">|</div>
-                <div class="tips ellipsis">{{warn(workorders) }}</div>
+                <div class="notice-list">
+                    <van-swipe style="height: 30px;" :show-indicators="false" :loop="true" :autoplay="3000" vertical>
+                        <van-swipe-item v-for="(item, index) in workorders" :key='index'>
+                            <div class="notice-item" >
+                                <div class="number">{{index+1}}</div>
+                                <div class="content">
+                                    <div class="time">{{item.workFirtime}}</div>
+                                    <div class="tips ellipsis">{{warn(workorders) + warn(workorders)+ warn(workorders)}}</div>
+                                </div>
+                            </div>
+                        </van-swipe-item>
+                    </van-swipe>
+                    <!-- <div class="notice-item" v-for="(item, index) in workorders" :key='index'>
+                        <div class="number">{{index+1}}</div>
+                        <div class="content">
+                            <div class="time">{{item.workFirtime}}</div>
+                            <div class="tips ellipsis">{{warn(workorders) }}</div>
+                        </div>
+                    </div> -->
+                </div>
             </div>
             <Tabbar></Tabbar>
         </div>
@@ -65,7 +87,7 @@ export default {
         warn() {
             return (e) => {
                 if (e.length !==0) {
-                   return e[0].workRoom + e[0].workDevice + e[0].workParam;
+                   return e[0].workRoom + e[0].workDevice + e[0].workCause;
                 }
             }
         }
@@ -150,11 +172,22 @@ export default {
     .data-center-list-item {
         width: calc(50% - 10px);
         margin: 0 10px 10px 0;
-        padding: 10px;
+        padding: 25px 10px 10px 10px;
         box-sizing: border-box;
         background: #fff;
         text-align: center;
         float: left;
+        position: relative;
+        border: 1px solid #fff;
+        &.is-error {
+            background: #EEDADB;
+            border: 1px solid #EA4F3D;
+        }
+        .tag {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
         p {
             margin: 8px 0 0 0;
         }
@@ -165,16 +198,49 @@ export default {
         }
     }
 }
+.notice-list {
+    width: 100%;
+}
 .center-notice {
     display: flex;
-    background: #fff;
-    padding: 15px 15px;
+    background: #EEDADB;
+    border: 1px solid #EA4F3D;
+    border-radius: 4px;
+    padding: 10px 15px;
     box-sizing: border-box;
     position: fixed;
     bottom: 52px;
-    left: 0;
-    width: 100%;
+    left: 1%;
+    width: 98%;
     font-size: 12px;
+    color: #EA4F3D; 
+    .notice-item {
+        display: flex;
+        align-items: center;
+        position: relative;
+        padding-left: 25px;
+       .number {
+            margin-right: 5px;
+            background: #EA4F3D;
+            color: #fff;
+            border-radius: 50%;
+            height: 20px;
+            width: 20px;
+            text-align: center;
+            line-height: 20px;
+            position: absolute;
+            left: 0;
+       }
+    }
+    .time {
+        color: #EE8C81;
+        margin-bottom: 5px;
+    }
+    .title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     .notice-number {
         color: #f44;
     }
@@ -182,7 +248,7 @@ export default {
         margin: 0 10px;
     }
     .tips {
-        color: #999;
+        color: #EA4F3D;
     }
 }
 </style>

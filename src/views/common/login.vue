@@ -2,71 +2,51 @@
     <section class="login cont_1" id="page1">
         <div class="top">
             <div class="top-text">
-                <!-- <img src="~assets/logo2.png" alt /> -->
+                <!-- <img src="~assets/logo.png" alt /> -->
                 <img :src="logoUrl" alt />
-                <p class="h1">数据中心综合管理平台</p>
+                <!-- <p class="h1">数据中心综合管理平台</p> -->
             </div>
-            <div class="h2">机房监控、容量管理、资产管理、运维管理</div>
+           <!--  <div class="h2">机房监控、容量管理、资产管理、运维管理</div> -->
+           <div class="h2">数据中心综合管理平台</div>
+           <div class="version">DCMS V2.0</div>
         </div>
         <div class="login-wrap">
-            <div class="login-title">
+            <!-- <div class="login-title">
                 <div class="sysname">FY-DCIM 监控平台</div>
                 <div class="title">登录账号</div>
-            </div>
+            </div> -->
             <div class="list userNameBox">
                 <i></i>
-                <input
-                    class="username"
-                    type="text"
-                    placeholder="账号"
-                    v-model="username"
-                    autocomplete="off"
-                />
+                <input class="username" type="text" placeholder="请输入用户名" v-model="username" autocomplete="off"/>
             </div>
             <div class="list passwordBox">
                 <i></i>
-                <input
-                    class="password"
-                    type="password"
-                    placeholder="密码"
-                    v-model="password"
-                    autocomplete="off"
-                />
+                <input class="password" type="password" placeholder="请输入密码" v-model="password" autocomplete="off"/>
             </div>
-            <!-- <div class="list noborder">
-                <label for="checked">
-                    <input v-model="checked" type="checkbox" id="checked" />记住用户名
-                </label>
-            </div> -->
+           
             <div class="btnBox">
-                <van-button type="info" @click="loginBtn" size="small" style="width: 100%">登录</van-button>
+                <van-button color="#4D69F6" @click="loginBtn" size="small" style="width: 60%">登录</van-button>
             </div>
         </div>
-        <!-- <div class="imgGroug">
-        <ul>
-            <img alt="" class="img0 png" src="~assets/page1_0.png">
-            <img alt="" class="img1 png" src="~assets/page1_1.png">
-            <img alt="" class="img2 png" src="~assets/page1_2.png">
-        </ul>
-        </div>-->
         <div class="copyright">©上海锋盁信息技术有限公司版权所有</div>
     </section>
 </template>
 
 <script>
 import { getUUID } from "@/utils/"
+import logoUrl from "@/assets/logo.png"
 export default {
     name: "login",
     data() {
         return {
-            logoUrl: "",
+            logoUrl: logoUrl,
             username: "",
             password: ""
         };
     },
     components: {},
     created() {
-        this.getLogo();
+        // this.getLogo();
     },
     mounted() {},
     methods: {
@@ -96,7 +76,7 @@ export default {
 </script>
 <style scoped lang="scss">
 .login {
-    background: #191c2c url(~assets/login-bg.png) no-repeat center bottom;
+    background: #191c2c url(~assets/login_bg.png) no-repeat center bottom;
     background-size: 100%;
     color: #fff;
     height: 100vh;
@@ -110,10 +90,11 @@ export default {
         }
     }
     .login-wrap {
-        background: #424451;
+        background: #fff;
         width: 70%;
         margin: 0 auto;
-        padding: 15px 20px 15px 20px;
+        padding: 40px 20px 30px 20px;
+        border-radius: 5px;
     }
     .top {
         /* width: 90%; */
@@ -123,6 +104,7 @@ export default {
         .top-text {
             font-size: 18px;
             display: flex;
+            justify-content: center;
             margin-bottom: 15px;
             .h1 {
                 font-size: 18px;
@@ -132,13 +114,18 @@ export default {
             }
         }
         .h2 {
+            font-size: 18px;
+            color: #fff;
+            text-align: center;
+             margin-bottom: 10px;
+        }
+        .version {
             font-size: 12px;
-            color: #ccc;
+            color: #fff;
             text-align: center;
         }
         img {
-            width: 110px;
-            height: 30px;
+            width: 60px;
             vertical-align: middle;
         }
         p {
@@ -148,7 +135,7 @@ export default {
     }
     .list {
         position: relative;
-        margin-bottom: 15px;
+        margin-bottom: 18px;
         &.noborder {
             border: none;
             color: #999;
@@ -164,7 +151,8 @@ export default {
             display: block;
             box-sizing: border-box;
             font-size: 14px;
-            border: none;
+            border: 1px solid #ccc;
+            border-radius: 2px;
             padding: 10px;
             padding-right: 60px;
             color: #444;
@@ -176,27 +164,29 @@ export default {
     }
     .userNameBox {
         i {
-            width: 12px;
+            width: 16px;
             height: 18px;
             top: 50%;
             right: 10px;
             transform: translate(0, -50%);
-            background: url("~assets/phone_ico.png") no-repeat left center;
+            background: url("~assets/icon_user.png") no-repeat left center;
             background-size: contain;
         }
     }
     .passwordBox {
         i {
-            width: 12px;
+            width: 16px;
             height: 18px;
             top: 50%;
             right: 10px;
             transform: translate(0, -50%);
-            background: url("~assets/pwd_ico.png") no-repeat left center;
+            background: url("~assets/icon_pass.png") no-repeat left center;
             background-size: contain;
         }
     }
     .btnBox {
+        margin-top: 28px;
+        text-align: center;
         .van-button--small {
             height: 40px;
             line-height: 38px;
