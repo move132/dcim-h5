@@ -23,9 +23,9 @@
                 <i></i>
                 <input class="password" type="password" placeholder="请输入密码" v-model="password" autocomplete="off"/>
             </div>
-           
+
             <div class="btnBox">
-                <van-button color="#4D69F6" @click="loginBtn" size="small" style="width: 60%">登录</van-button>
+                <van-button color="#4D69F6" @click="loginBtn" size="small" style="width: 60%; background: #4D69F6; color: #fff;">登录</van-button>
             </div>
         </div>
         <div class="copyright">©上海锋盁信息技术有限公司版权所有</div>
