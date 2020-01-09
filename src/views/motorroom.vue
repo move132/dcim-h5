@@ -7,6 +7,7 @@
             <div class="device-item" v-for="(item, index) in deviceList" :key="index" @click="deviceInfo(item)">
                 <van-image fit="cover" :show-error="false" width="45" height="45" :src="item.detyIcon"></van-image>
                 <p class="ellipsis">{{item.detyName}}</p>
+                <van-tag class="rod" round type="danger" v-if="item.warnNum > 0">{{item.warnNum}}</van-tag>
             </div>
         </div>
         <Tabbar></Tabbar>
@@ -63,6 +64,12 @@ export default {
         width: 25%;
         text-align: center;
         margin-bottom: 10px;
+        position: relative;
+        .rod {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
         p {
             margin: 5px 0;
         }

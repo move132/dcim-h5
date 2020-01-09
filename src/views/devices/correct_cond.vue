@@ -2,6 +2,9 @@
 <template>
 <!-- 精密空调 -->
     <div class="cond">
+        <van-dropdown-menu class="drop-top">
+            <van-dropdown-item v-model="devicevalue" :options="deviceList" @change="dropdownChange"/>
+        </van-dropdown-menu>
         <van-tabs style="padding-top:0"
             type="card"
             title-active-color="#fff"
@@ -52,6 +55,8 @@ import Nodata from '@/components/Nodata';
 export default {
     data() {
         return {
+            devicevalue: "",
+            deviceList: [],
             runParamList: [], // 运行参数
             unitStatuList: [], // 部件状态
             warnStatuList: [] // 报警状态
@@ -61,8 +66,11 @@ export default {
         Nodata
     },
     created() {
-		this.queryParam = this.$router.currentRoute.query;
-        this.getDeviceListByParam();
+        this.queryParam = this.$router.currentRoute.query;
+        this.getDeviceListByParam().then(() => {
+            let parm = {deviId: this.devicevalue};
+            this.getDataList(parm);
+        })
 	},
   	activated() {
 
@@ -74,9 +82,26 @@ export default {
         },
         getDeviceListByParam() {
             let param = {
-                deviId: this.queryParam.deviId // 设备类型编号"
-            };
-            this.get(`/ls_dcim/mobile/getDeviceDataByDeviId`, param).then(({data}) => {
+				macrId: this.queryParam.macrId, // 机房编号
+				detyId: this.queryParam.detyId  // 设备类型编号"
+			}
+            return this.get(`/ls_dcim/mobile/getDeviceListByParam`, param).then(({data}) => {
+                let list = [];
+                for (let i = 0; i < data.length; i++) {
+                    const element = data[i];
+                    list.push({ text: element.deviName, value: element.deviId });
+                }
+                this.deviceList = list;
+                this.devicevalue = list[0].value;
+            })
+        },
+        dropdownChange(e) {
+            let parm = { deviId: e};
+            this.getDataList(parm);
+        },
+        getDataList(parm) {
+            parm.isnoloading = true;
+            this.get(`/ls_dcim/mobile/getDeviceDataByDeviId`, parm).then(({data}) => {
                 this.runParamList = data.runParamList;
                 this.unitStatuList = data.unitStatuList;
                 this.warnStatuList = data.warnStatuList;
@@ -91,7 +116,6 @@ export default {
     margin-top: 10px;
 }
 .drop-top {
-    margin-top: 30px;
     height: 35px;
 }
 .d-box {

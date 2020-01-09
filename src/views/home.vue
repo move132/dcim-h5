@@ -19,10 +19,10 @@
                     <div
                         v-for="(item, index) in engineList"
                         :key="''+index"
-                        :class="['data-center-list-item',item.macrId === 7 ? 'is-error': '']"
+                        :class="['data-center-list-item',item.warnNum > 0 ? 'is-error': '']"
                         @click="goDevice(item)"
                     >
-                        <van-tag class="tag" v-if='item.macrId === 7' round type="danger">12</van-tag>
+                        <van-tag class="tag" v-if='item.warnNum > 0' round type="danger">{{item.warnNum}}</van-tag>
                         <van-image fit="cover" height="68" width="100%" :src="item.macrMobileimg"></van-image>
                         <p>{{item.macrName}}</p>
                     </div>
@@ -213,7 +213,7 @@ export default {
     left: 1%;
     width: 98%;
     font-size: 12px;
-    color: #EA4F3D; 
+    color: #EA4F3D;
     .notice-item {
         display: flex;
         align-items: center;

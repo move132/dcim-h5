@@ -1,48 +1,11 @@
 
 <template>
     <div>
-        <van-nav-bar class="dc-topbar" :title="macrName+'-'+title" fixed left-arrow @click-left="onClickLeft" >
-
+        <van-nav-bar class="dc-topbar" :title="macrName + '-' + title" fixed left-arrow @click-left="onClickLeft" >
         </van-nav-bar>
         <div class="wrap">
-           <!--  <van-tabs
-                type="card"
-                title-active-color="#fff"
-                color="#00A0E8"
-                title-inactive-color="#333">
-                <van-tab title="运行参数">
-                    <div class="mgt10">
-                        <van-row class="row" v-for="index in 16" :key="index">
-                            <van-col span="12">
-                                <div class="item">
-                                    设定温度
-                                    <van-tag
-                                        :type="Math.ceil(Math.random()*2) === 1 ?'danger':'success'"
-                                    >{{Math.ceil(Math.random()*23)}}</van-tag>
-                                    <span class="unit">C</span>
-                                </div>
-                            </van-col>
-                            <van-col span="12">
-                                <div class="item">
-                                    设定温度
-                                    <van-tag
-                                        :type="Math.ceil(Math.random()*2) === 1 ?'primary':'success'"
-                                    >{{Math.ceil(Math.random()*999)}}</van-tag>
-                                    <span class="unit">%</span>
-                                </div>
-                            </van-col>
-                        </van-row>
-                    </div>
-                </van-tab>
-                <van-tab title="部件状态"></van-tab>
-                <van-tab title="报警状态"></van-tab>
-            </van-tabs> -->
-            <!-- ups -->
-
             <ups v-if="queryParam.detyName === 'UPS'" ref="ups"></ups>
             <humidity v-else-if="queryParam.detyName === '温湿度'" ref="wsd"></humidity>
-
-            <!-- <smoke v-else-if="queryParam.detyName === '烟感'" ref="yg"></smoke> -->
 
             <Infrared v-else-if="queryParam.detyName === '红外'" ref="hw"></Infrared>
 
@@ -54,29 +17,15 @@
             <accesscontrol v-else-if="queryParam.detyName === '门禁'"  ref="mj"></accesscontrol>
             <newsletter-status v-else-if="queryParam.detyName === '通讯状态'"  ref="txzt" ></newsletter-status>
 
-
             <ordinaryair v-else-if="queryParam.detyName === '普通空调'" ref="ptkt"></ordinaryair>  <!-- 普通空调 -->
             <correctcond v-else-if="queryParam.detyName === '空调'" ref="jmkt"></correctcond>  <!-- 精密空调 -->
             <powercabinet v-else-if="queryParam.detyName === '配电柜'" ref="pdg"></powercabinet>  <!-- 配电柜 -->
             <powercabinetswitch v-else-if="queryParam.detyName === '配电柜开关'" ref="pdgkg"></powercabinetswitch>  <!-- 配电柜开关 -->
+            <monitorvideo v-else-if="queryParam.detyName === '视频'" ref="sp"></monitorvideo> <!-- 视频 -->
+
             <!-- <newsletter-status></newsletter-status> -->
             <!-- <firefighting v-else-if="queryParam.detyName === '烟感'" ref="xf"></firefighting> -->  <!-- 消防 -->
             <!-- <firefighting></firefighting> -->
-            <!--
-                温湿度：wsd
-                烟感：yg
-                红外：hw
-                漏水：ls
-                照明：zm
-                新风机：xfj
-                电池：dc
-                空调：kt
-                配电柜：pdg
-                配电柜开关：pdgkg
-                UPS：ups
-                普通空调：ptkt
-            -->
-            <!-- <Nodata v-else></Nodata> -->
             <Tabbar></Tabbar>
         </div>
     </div>
@@ -87,7 +36,6 @@ import Tabbar from "@/components/Tabbar";
 import Nodata from '@/components/Nodata';
 import humidity from "./devices/humidity";
 import ups from "./devices/ups"
-import smoke from "./devices/smoke";
 import Infrared from "./devices/Infrared";
 import leakingWater from "./devices/leaking_water";
 import illumine from "./devices/illumine";
@@ -99,6 +47,7 @@ import newsletterStatus from "./devices/newsletter_status";
 import ordinaryair from "./devices/ordinaryair";
 import powercabinetswitch from "./devices/power_cabinet_switch"
 import firefighting from "./devices/firefighting"
+import monitorvideo from "./devices/monitorvideo"
 export default {
     data() {
         return {
@@ -112,7 +61,6 @@ export default {
         Nodata,
         humidity,
         ups,
-        smoke,
         Infrared,
         leakingWater,
         illumine,
@@ -123,7 +71,8 @@ export default {
         newsletterStatus,
         ordinaryair,
         powercabinetswitch,
-        firefighting
+        firefighting,
+        monitorvideo
     },
     activated() {
 

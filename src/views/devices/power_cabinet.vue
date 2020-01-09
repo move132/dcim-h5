@@ -1,6 +1,9 @@
 <template>
 <!-- 配电柜 -->
     <div class="power">
+        <van-dropdown-menu class="drop-top mgt0">
+            <van-dropdown-item v-model="devicevalue" :options="deviceList" @change="dropdownChange"/>
+        </van-dropdown-menu>
         <div class="power-header">运行参数</div>
         <div class="power-list">
             <div class="item" v-for="(item, index) in dataList" :key="index">
@@ -8,33 +11,58 @@
                 <van-tag type="primary">运行</van-tag>
                 <span v-if="item.unit">{{item.unit}}</span>
             </div>
+            <Nodata v-if="dataList.length === 0"></Nodata>
         </div>
     </div>
 </template>
 
 <script>
+import Nodata from '@/components/Nodata';
 export default {
     data() {
         return {
+            devicevalue: "",
+            deviceList: [],
             dataList: []
         };
     },
     components: {
+        Nodata
     },
     created() {
         this.queryParam = this.$router.currentRoute.query;
-        this.getDataList();
+        this.getDeviceListByParam().then(() => {
+            let parm = {deviId: this.devicevalue};
+            this.getDataList(parm);
+        })
     },
     activated() {
 
     },
     computed: {},
     methods: {
-        getDataList() {
+        getDeviceListByParam() {
             let param = {
-                deviId: this.queryParam.deviId // 设备编号"
-            };
-            this.get(`/ls_dcim/mobile/getDeviceDataByDeviId`, param).then(({data}) => {
+				macrId: this.queryParam.macrId, // 机房编号
+				detyId: this.queryParam.detyId  // 设备类型编号"
+			}
+            return this.get(`/ls_dcim/mobile/getDeviceListByParam`, param).then(({data}) => {
+                let list = [];
+                for (let i = 0; i < data.length; i++) {
+                    const element = data[i];
+                    list.push({ text: element.deviName, value: element.deviId });
+                }
+                this.deviceList = list;
+                this.devicevalue = list[0].value;
+            })
+        },
+        dropdownChange(e) {
+            let parm = { deviId: e};
+            this.getDataList(parm);
+        },
+        getDataList(parm) {
+            parm.isnoloading = true;
+            this.get(`/ls_dcim/mobile/getDeviceDataByDeviId`, parm).then(({data}) => {
                 this.dataList = data.runParamList;
             })
         }
