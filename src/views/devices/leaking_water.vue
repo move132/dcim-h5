@@ -9,7 +9,7 @@
                         :style="{left: item.deviX +'px', top: item.deviY +'px', transform: 'scale('+(1/zoom)+')'}">
                         <span>
                             <i>{{item.pointNum}}</i>
-                            <img src="../../assets/device/humidity.png" alt />
+                            <img src="../../assets/device/water.png" alt />
                         </span>
                     </div>
                 </div>
