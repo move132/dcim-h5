@@ -8,7 +8,7 @@
                         :class="['point',{nomal: item.point === '0' || item.point === '0.0'},{warn: item.point > 0}]"
                         :style="{left: item.deviX +'px', top: item.deviY +'px', transform: 'scale('+(1/zoom)+')'}">
                         <span>
-                            <i>{{item.pointNum}}</i>
+                            <i :class="{'warn': item.point > 0}">{{item.pointNum}}</i>
                             <img v-if="item.point > 0" src="../../assets/device/water_warn.png" alt />
                             <img v-else src="../../assets/device/water_nomal.png" alt />
                         </span>
@@ -150,6 +150,9 @@ export default {
                 border-radius: 50%;
                 color: #fff;
                 transform: scale(.5);
+                &.warn {
+                    background: #EA4E3D;
+                }
             }
             img {
                 width: 26px;
