@@ -5,11 +5,12 @@
             <div class="device-box">
                 <div class="deviceimg-wrap" :style="{'background-image': 'url('+macrMobileimg+')', zoom: zoom}">
                     <div v-for="(item, index) in dataList" :key="index"
-                        :class="['point',{nomal: item.warn === '0' || item.warn === '0.0'},{warn: item.warn === '1' || item.warn === '1.0'}]"
+                        :class="['point',{nomal: item.point === '0' || item.point === '0.0'},{warn: item.point > 0}]"
                         :style="{left: item.deviX +'px', top: item.deviY +'px', transform: 'scale('+(1/zoom)+')'}">
                         <span>
                             <i>{{item.pointNum}}</i>
-                            <img src="../../assets/device/water.png" alt />
+                            <img v-if="item.point > 0" src="../../assets/device/water_warn.png" alt />
+                            <img v-else src="../../assets/device/water_nomal.png" alt />
                         </span>
                     </div>
                 </div>

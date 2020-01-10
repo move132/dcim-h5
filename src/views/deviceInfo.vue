@@ -23,9 +23,7 @@
             <powercabinetswitch v-else-if="queryParam.detyName === '配电柜开关'" ref="pdgkg"></powercabinetswitch>  <!-- 配电柜开关 -->
             <monitorvideo v-else-if="queryParam.detyName === '视频'" ref="sp"></monitorvideo> <!-- 视频 -->
 
-            <!-- <newsletter-status></newsletter-status> -->
-            <!-- <firefighting v-else-if="queryParam.detyName === '烟感'" ref="xf"></firefighting> -->  <!-- 消防 -->
-            <!-- <firefighting></firefighting> -->
+            <Nodata v-else></Nodata>
             <Tabbar></Tabbar>
         </div>
     </div>
