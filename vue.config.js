@@ -40,6 +40,7 @@ module.exports = {
     // 项目部署的基础路径 默认/
     // 放在子目录时使用./或者加你的域名
     publicPath: process.env.BASE_URL,
+    assetsDir: "static",
     configureWebpack: config => {
         if (isProduction) {
             // externals里的模块不打包

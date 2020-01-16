@@ -8,7 +8,7 @@ axios.defaults.baseURL = process.env.VUE_APP_BASE_API;
 axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded;charset=UTF-8"; // post请求头的设置
 */
 const http = axios.create({
-    baseURL: process.env.VUE_APP_BASE_API,
+    baseURL: window.VUE_APP_BASE_API,
     timeout: 1000 * 10,
     withCredentials: true,
     crossDomain: true,

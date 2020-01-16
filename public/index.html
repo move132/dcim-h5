@@ -22,7 +22,10 @@
             rel="stylesheet"
         />
         <% } %>
-
+        <% if (process.env.NODE_ENV === 'production') { %>
+            <!-- 生产环境 -->
+            <script>document.write('<script src="./config/index.js?t=' + new Date().getTime() + '"><\/script>');</script>
+        <% }%>
         <title>数据中心综合管理平台</title>
     </head>
 

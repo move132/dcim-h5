@@ -92,7 +92,8 @@ export default {
         },
         initWebSocket() {
             // 初始化weosocket
-            const wsuri = "ws://"+process.env.VUE_APP_WEBSOCKET_API+"/ls_dcim/websocket";
+            let path = process.env.NODE_ENV === 'production' ? window.VUE_APP_WEBSOCKET_API : process.env.VUE_APP_WEBSOCKET_API;
+            const wsuri = path + "/ls_dcim/websocket";
             this.websock = new WebSocket(wsuri);
             this.websock.onopen = this.websocketonopen;
             this.websock.onerror = this.websocketonerror;
