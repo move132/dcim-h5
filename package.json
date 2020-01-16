@@ -5,7 +5,7 @@
   "main": "mian.js",
   "scripts": {
     "dev": "vue-cli-service serve",
-    "build": "vue-cli-service build && node zip.js && http-server ./dist -p 9999 ",
+    "build": "vue-cli-service build && node copy.js && node zip.js && http-server ./dist -p 9999 ",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

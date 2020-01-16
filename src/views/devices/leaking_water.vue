@@ -57,7 +57,7 @@ export default {
             };
             this.get(`/ls_dcim/mobile/getWaterLeakage`, param).then(({ data }) => {
                 if (data.length > 0) {
-                    let macrMobileimg = "http://dcim.fengyingtech.com/ls_dcim/static/img/room/thumb/65c15b34f82f4a3bb2b3ee16a5e87411.png";// data[0].device.macrMobileimg;
+                    let macrMobileimg = data[0].macrMobileimg;
                     let list = [];
                     data.forEach(item => {
                         list.push({
