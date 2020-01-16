@@ -1,5 +1,4 @@
 <template>
-    <!-- 照明 -->
     <div class="video">
         <div class="video-list">
             <div class="video-item" v-for="(item ,index) in dataList" :key="index">
