@@ -49,7 +49,7 @@ export default {
     /* margin-left: 1%; */
     .video-item {
         height: 200px;
-        margin-bottom: 5px;
+        /* margin-bottom: 5px; */
         width: 100%;
         background: #666;
     }
