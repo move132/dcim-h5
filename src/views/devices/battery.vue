@@ -3,26 +3,6 @@
     <div>
         <div class="battery">
             <template v-if="dataList.length > 0">
-               <!--  <div class="info">
-                    <div class="fild">
-                        <div>
-                            <span class="label">总电压：</span>
-                            <span class="val">{{dataList[0].zdy+dataList[0].zdyUnit}}</span>
-                        </div>
-                        <div>
-                            <span class="label">总电流：</span>
-                            <span class="val">{{dataList[0].zdl+dataList[0].zdlUnit}}</span>
-                        </div>
-                    </div>
-                    <div class="fild">
-                        <div>
-                            <span class="label">报警状态：</span>
-                            <span class="val">
-                                <van-tag :type="dataList[0].dcbj ==='0' || dataList[0].dcbj ==='0.0' ?'success':'danger'">{{dataList[0].dcbj==="1"|| dataList[0].dcbj==="1.0"?'报警':'正常'}}</van-tag>
-                            </span>
-                        </div>
-                    </div>
-                </div> -->
                 <van-collapse v-model="activeNames">
                     <van-collapse-item :title="item.name" :name="index + 1" v-for="(item, index) in dataList" :key="index">
                         <div class="coll-list">
@@ -43,23 +23,7 @@
                                             <div>温度: {{subitem.wd}}{{item.wdUnit}}</div>
                                         </div>
                                     </div>
-                                   <!--  <div class="item" :key="num+'dy'" >
-                                        <span class="name">{{subitem.depaVname}}电压</span>
-                                        <van-tag type="primary">{{subitem.dy}}</van-tag>
-                                        <span class="unit" v-if="item.dyUnit">{{item.dyUnit}}</span>
-                                    </div>
-                                    <div class="item" :key="num+'nz'">
-                                        <span class="name">{{subitem.depaVname}}内阻</span>
-                                        <van-tag type="primary">{{subitem.nz}}</van-tag>
-                                        <span class="unit" v-if="subitem.nzUnit">{{item.nzUnit}}</span>
-                                    </div>
-                                    <div class="item" :key="num+'wd'">
-                                        <span class="name">{{subitem.depaVname}}温度</span>
-                                        <van-tag type="primary">{{subitem.wd}}</van-tag>
-                                        <span class="unit" v-if="subitem.wdUnit">{{item.wdUnit}}</span>
-                                    </div> -->
                                 </template>
-
                             </template>
                         </div>
                     </van-collapse-item>
@@ -115,20 +79,20 @@ export default {
     display: flex;
     flex-wrap: wrap;
     .bg-iitem {
-        width: 33.333%; 
+        width: 33.333%;
         color: #fff;
         margin: 10px 0;
         &:nth-child(3n) {
             .content-flex {
                 margin-right: 0;
             }
-        } 
+        }
         .content-flex {
             position: relative;
             padding: 30px 10px 10px 15px;
             margin-right: 10px;
             background: url(../../assets/device/battery.png) no-repeat;
-            background-size: 100% 100%; 
+            background-size: 100% 100%;
             .number {
                 position: absolute;
                 background: #fff;

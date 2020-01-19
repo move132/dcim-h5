@@ -22,7 +22,7 @@
             <powercabinet v-else-if="queryParam.detyName === '配电柜'" ref="pdg"></powercabinet>  <!-- 配电柜 -->
             <powercabinetswitch v-else-if="queryParam.detyName === '配电柜开关'" ref="pdgkg"></powercabinetswitch>  <!-- 配电柜开关 -->
             <monitorvideo v-else-if="queryParam.detyName === '视频'" ref="sp"></monitorvideo> <!-- 视频 -->
-
+            <tempsensing v-else-if="queryParam.detyName === '温度感应'" ref="wdgy"></tempsensing> <!-- 温度感应 -->
             <Nodata v-else></Nodata>
             <Tabbar></Tabbar>
         </div>
@@ -46,6 +46,7 @@ import ordinaryair from "./devices/ordinaryair";
 import powercabinetswitch from "./devices/power_cabinet_switch"
 import firefighting from "./devices/firefighting"
 import monitorvideo from "./devices/monitorvideo"
+import tempsensing from "./devices/temp_sensing"
 export default {
     data() {
         return {
@@ -70,7 +71,8 @@ export default {
         ordinaryair,
         powercabinetswitch,
         firefighting,
-        monitorvideo
+        monitorvideo,
+        tempsensing
     },
     activated() {
 
